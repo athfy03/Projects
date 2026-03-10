@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SpeakUpApp.Views.AchievementsPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="White">
+
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0"
+              BackgroundColor="#0077cc"
+              Padding="10,40,10,10"
+              ColumnSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    Text="←"
+                    Clicked="Back_Clicked"
+                    BackgroundColor="Transparent"
+                    TextColor="White"
+                    FontSize="32"
+                    WidthRequest="56"
+                    HeightRequest="56"
+                    Padding="0"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center" />
+
+            <Label Grid.Column="1"
+                   Text="Achievements"
+                   TextColor="White"
+                   FontSize="22"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+
+            <Button Grid.Column="2"
+                    BackgroundColor="Transparent"
+                    IsEnabled="False"
+                    Opacity="0"
+                    WidthRequest="56"
+                    HeightRequest="56"
+                    Padding="0" />
+        </Grid>
+
+        <!-- Main content: big badges -->
+        <ScrollView Grid.Row="1">
+            <CollectionView x:Name="AchievementsList"
+                            Margin="0,20"
+                            SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="30" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalOptions="Center">
+                            <Frame Padding="0"
+                                   HasShadow="True"
+                                   CornerRadius="24"
+                                   BackgroundColor="White"
+                                   BorderColor="#e0e0e0"
+                                   WidthRequest="260">
+                                <StackLayout Spacing="8"
+                                             Padding="0,12,0,16"
+                                             HorizontalOptions="Center">
+
+                                    <!-- Badge image -->
+                                    <Image Source="{Binding BadgeImage}"
+                                           HeightRequest="120"
+                                           HorizontalOptions="Center">
+                                        <Image.Style>
+                                            <Style TargetType="Image">
+                                                <!-- default: locked = faded -->
+                                                <Setter Property="Opacity" Value="0.4" />
+                                                <Style.Triggers>
+                                                    <DataTrigger TargetType="Image"
+                                                                 Binding="{Binding IsEarned}"
+                                                                 Value="True">
+                                                        <Setter Property="Opacity" Value="1" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+
+                                    <!-- Title -->
+                                    <Label Text="{Binding Title}"
+                                           FontAttributes="Bold"
+                                           FontSize="14"
+                                           HorizontalOptions="Center" />
+
+                                    <!-- Description -->
+                                    <Label Text="{Binding Description}"
+                                           FontAttributes="Bold"
+                                           FontSize="12"
+                                           TextColor="Black"
+                                           HorizontalOptions="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Margin="10,0,10,0" />
+
+                                    <!-- Status line: Locked / Unlocked -->
+                                    <Label FontSize="12"
+                                           HorizontalOptions="Center">
+                                        <Label.Style>
+                                            <Style TargetType="Label">
+                                                <Setter Property="Text" Value="Status: Locked" />
+                                                <Setter Property="TextColor" Value="Gray" />
+                                                <Style.Triggers>
+                                                    <DataTrigger TargetType="Label"
+                                                                 Binding="{Binding IsEarned}"
+                                                                 Value="True">
+                                                        <Setter Property="Text" Value="Status: Unlocked" />
+                                                        <Setter Property="TextColor" Value="Green" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+
+        <!-- Bottom nav -->
+        <Grid Grid.Row="2"
+              BackgroundColor="#0077cc">
+            <Button Text="🏠"
+                    Clicked="HomeButton_Clicked"
+                    BackgroundColor="Transparent"
+                    TextColor="White"
+                    FontSize="26"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+        </Grid>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SpeakUpApp.Views.QuizReviewPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="White">
+
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0"
+              BackgroundColor="#0077cc"
+              Padding="10,40,10,10"
+              ColumnSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    Text="←"
+                    Clicked="Back_Clicked"
+                    BackgroundColor="Transparent"
+                    TextColor="White"
+                    FontSize="32"
+                    WidthRequest="56"
+                    HeightRequest="56"
+                    Padding="0"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center" />
+
+            <Label Grid.Column="1"
+                   Text="Review Answers"
+                   TextColor="White"
+                   FontSize="22"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+
+            <Button Grid.Column="2"
+                    BackgroundColor="Transparent"
+                    IsEnabled="False"
+                    Opacity="0"
+                    WidthRequest="56"
+                    HeightRequest="56"
+                    Padding="0" />
+        </Grid>
+
+        <!-- Questions list -->
+        <CollectionView Grid.Row="1"
+                        x:Name="QuestionsList"
+                        Margin="10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="0,6"
+                           Padding="10"
+                           CornerRadius="10"
+                           BorderColor="#0077cc">
+                        <StackLayout Spacing="4">
+                            <Label Text="{Binding Number, StringFormat='Question {0}'}"
+                                   FontAttributes="Bold" />
+                            <Label Text="{Binding QuestionText}"
+                                   FontSize="14" />
+
+                            <!-- Your answer label with red/green logic -->
+                            <Label Text="{Binding SelectedOption, StringFormat='Your answer: {0}'}"
+                                   FontSize="13">
+                                <Label.Style>
+                                    <Style TargetType="Label">
+                                        <!-- default: wrong / not answered = red -->
+                                        <Setter Property="TextColor" Value="Red" />
+
+                                        <Style.Triggers>
+                                            <!-- if IsCorrect == true, make it green -->
+                                            <DataTrigger TargetType="Label"
+                                                         Binding="{Binding IsCorrect}"
+                                                         Value="True">
+                                                <Setter Property="TextColor" Value="Green" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Label.Style>
+                            </Label>
+
+                            <Label Text="{Binding CorrectOption, StringFormat='Correct answer: {0}'}"
+                                   FontSize="13" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Bottom nav -->
+        <Grid Grid.Row="2"
+              BackgroundColor="#0077cc">
+            <Button Text="🏠"
+                    Clicked="HomeButton_Clicked"
+                    BackgroundColor="Transparent"
+                    TextColor="White"
+                    FontSize="26"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+        </Grid>
+    </Grid>
+</ContentPage>

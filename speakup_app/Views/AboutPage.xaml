@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SpeakUpApp.Views.AboutPage"
+             NavigationPage.HasNavigationBar="False"
+             Title="About Us">
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              BackgroundColor="#0077cc"
+              Padding="10,40,10,10"
+              ColumnSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    Text="←"
+                    Clicked="Back_Clicked"
+                    BackgroundColor="Transparent"
+                    TextColor="White"
+                    FontSize="32"
+                    WidthRequest="56"
+                    HeightRequest="56"
+                    Padding="0"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center" />
+
+            <Label Grid.Column="1"
+                   Text="About Us"
+                   TextColor="White"
+                   FontSize="22"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+
+            <Button Grid.Column="2"
+                    BackgroundColor="Transparent"
+                    IsEnabled="False"
+                    Opacity="0"
+                    WidthRequest="56"
+                    HeightRequest="56"
+                    Padding="0" />
+        </Grid>
+
+
+        <StackLayout Grid.Row="1"
+                     Padding="20"
+                     Spacing="16">
+            <Frame CornerRadius="12"
+                   BackgroundColor="#e6f2ff"
+                   Padding="10">
+                <Label Text="Description"
+                       FontAttributes="Bold" />
+            </Frame>
+            <Label Text="SpeakUp is an English language enhancement app that helps users expand their vocabulary and comprehension through daily quizzes."
+                   FontSize="14"/>
+
+            <Frame CornerRadius="12"
+                   BackgroundColor="#e6f2ff"
+                   Padding="10">
+                <Label Text="Developer"
+                       FontAttributes="Bold" />
+            </Frame>
+            <Label Text="Awang Mohammed Zahed Athfy Bin Abdullah"
+                   FontSize="14"/>
+
+            <Label Text="Version 1.0.0"
+                   FontSize="12"
+                   HorizontalOptions="Center"
+                   Margin="0,20,0,0"/>
+        </StackLayout>
+
+        <Grid Grid.Row="2"
+            BackgroundColor="#0077cc">
+            <Button Text="🏠"
+                Clicked="HomeButton_Clicked"
+                BackgroundColor="Transparent"
+                TextColor="White"
+                FontSize="26"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+        </Grid>
+
+    </Grid>
+</ContentPage>

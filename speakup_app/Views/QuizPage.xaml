@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SpeakUpApp.Views.QuizPage"
+             Title="Quiz"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="White">
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <!-- header -->
+            <RowDefinition Height="*" />
+            <!-- question -->
+            <RowDefinition Height="Auto" />
+            <!-- navigation buttons -->
+            <RowDefinition Height="60" />
+            <!-- bottom nav -->
+        </Grid.RowDefinitions>
+
+        <!-- Blue header with back -->
+        <Grid Grid.Row="0"
+              BackgroundColor="#0077cc"
+              Padding="10,40,10,10"
+              ColumnSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Back arrow -->
+            <Button Grid.Column="0"
+                Text="←"
+                Clicked="Back_Clicked"
+                BackgroundColor="Transparent"
+                TextColor="White"
+                FontSize="32"
+                WidthRequest="56"
+                HeightRequest="56"
+                Padding="0"
+                HorizontalOptions="Start"
+                VerticalOptions="Center" />
+
+            <!-- Centered title -->
+            <Label Grid.Column="1"
+               Text="Quiz"
+               TextColor="White"
+               FontSize="22"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+
+            <!-- Invisible dummy to balance the back button width -->
+            <Button Grid.Column="2"
+                    BackgroundColor="Transparent"
+                    IsEnabled="False"
+                    Opacity="0"
+                    WidthRequest="56"
+                    HeightRequest="56"
+                    Padding="0" />
+        </Grid>
+
+
+        <!-- Question + options -->
+        <StackLayout Grid.Row="1"
+                     Padding="20"
+                     Spacing="16">
+            <Label x:Name="QuestionLabel"
+                   FontSize="20"
+                   TextColor="Black"
+                   LineBreakMode="WordWrap"/>
+
+            <RadioButton x:Name="OptionA" GroupName="Options" CheckedChanged="Option_CheckedChanged"/>
+            <RadioButton x:Name="OptionB" GroupName="Options" CheckedChanged="Option_CheckedChanged"/>
+            <RadioButton x:Name="OptionC" GroupName="Options" CheckedChanged="Option_CheckedChanged"/>
+            <RadioButton x:Name="OptionD" GroupName="Options" CheckedChanged="Option_CheckedChanged"/>
+
+            <Label x:Name="ProgressLabel"
+                   FontSize="14"
+                   TextColor="Gray" />
+        </StackLayout>
+
+        <!-- Back / Next -->
+        <StackLayout Grid.Row="2"
+                     Orientation="Horizontal"
+                     HorizontalOptions="Center"
+                     Margin="20,10"
+                     Spacing="20">
+            <Button Text="Back"
+                    WidthRequest="120"
+                    Clicked="Prev_Clicked"
+                    BackgroundColor="#eeeeee"
+                    TextColor="Black"/>
+            <Button x:Name="NextButton"
+                    Text="Next"
+                    WidthRequest="120"
+                    Clicked="Next_Clicked"
+                    BackgroundColor="#0077cc"
+                    TextColor="White"/>
+        </StackLayout>
+
+        <!-- Bottom nav -->
+        <Grid Grid.Row="3"
+            BackgroundColor="#0077cc">
+            <Button Text="🏠"
+                Clicked="HomeButton_Clicked"
+                BackgroundColor="Transparent"
+                TextColor="White"
+                FontSize="26"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+        </Grid>
+    </Grid>
+</ContentPage>
